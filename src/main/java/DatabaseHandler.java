@@ -1,5 +1,3 @@
-package Domain;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,8 +13,8 @@ public class DatabaseHandler extends Configs {
         dbConnection = DriverManager.getConnection(connectionString,dbUser,dbPass);
         return dbConnection;
     }
-    public void createDay(String typeOfTransp) throws SQLException, ClassNotFoundException {
-        String insert="INSERT INTO"+ Const.USER_TABLE+"(" + Const.DAYS_TYPEOFTRANSP+")"+"VALUES(?)";
+    public void createUser(String typeOfTransp) throws SQLException, ClassNotFoundException {
+        String insert="INSERT INTO"+ Const.USER_TABLE+"(" + Const.USERS_ID+")"+"VALUES(?)";
         PreparedStatement prSt = getDbConnection().prepareStatement(insert);
         prSt.setString(1,typeOfTransp);
         prSt.executeUpdate();
