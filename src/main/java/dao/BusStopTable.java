@@ -1,14 +1,17 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
+package dao;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
+public class BusStopTable {
+    private ArrayList<String> nameOfBusStop;
 
-public class ScheduleServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void init(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ArrayList<String> buffer = new ArrayList<>();
         Configs configs = new Configs();
         PrintWriter pw = response.getWriter();
         try {
@@ -23,17 +26,24 @@ public class ScheduleServlet extends HttpServlet {
                     configs.dbPass);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT nameOfTranspStop from transportstop");
-            while (rs.next()){
-                pw.println(rs.getString("nameOfTranspStop"));
+
+
+            while (rs.next()) {
+                buffer.add(rs.getString("nameOfTranspStop"));
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        nameOfBusStop = buffer;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //    response.setContentType("myText/html");
+
+    public void setNameOfBusStop(ArrayList<String> nameOfBusStop) {
+        this.nameOfBusStop = nameOfBusStop;
+    }
+
+    public ArrayList<String> getNameOfBusStop() {
+        return nameOfBusStop;
     }
 }
