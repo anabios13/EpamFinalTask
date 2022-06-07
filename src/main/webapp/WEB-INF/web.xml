@@ -12,12 +12,4 @@
         <servlet-name>MyServletJSP</servlet-name>
         <url-pattern>/My-Servlet-JSP</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ScheduleServlet</servlet-name>
-        <servlet-class>ScheduleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ScheduleServlet</servlet-name>
-        <url-pattern>/Schedule</url-pattern>
-    </servlet-mapping>
 </web-app>
